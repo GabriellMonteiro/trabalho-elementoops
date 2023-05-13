@@ -90,11 +90,9 @@ public abstract class Criatura {
 	public void ataqueFisico(Criatura atacante, Criatura defensor) {
 		int DANO = (atacante.getPODER() * atacante.getATAQUE())
 				/ defensor.getDEFESA();
-		System.out.println("ATAQUE FÍSICO!");
-		System.out.println("-" + DANO);
+		System.out.println("ATAQUE FÍSICO: " + DANO);
 		receberDano(atacante, defensor, 0);
-		System.out.println("PONTOS DE VIDA DO ADVERSÁRIO");
-		System.out.println(defensor.getPONTOS_DE_VIDA());
+		System.out.println("PONTOS DE VIDA DO ADVERSÁRIO: " + defensor.getPONTOS_DE_VIDA());
 	} // ataque fisico
 
 	public void ataqueElemental(Criatura atacante, Criatura defensor) {
