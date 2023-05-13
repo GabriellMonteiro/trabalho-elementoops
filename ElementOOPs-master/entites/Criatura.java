@@ -90,7 +90,7 @@ public abstract class Criatura {
 	public void ataqueFisico(Criatura atacante, Criatura defensor) {
 		int DANO = (atacante.getPODER() * atacante.getATAQUE())
 				/ defensor.getDEFESA();
-		System.out.println("Ataque fisíco!");
+		System.out.println("ATAQUE FÍSICO!");
 		System.out.println("-" + DANO);
 		receberDano(atacante, defensor, 0);
 		System.out.println("PONTOS DE VIDA DO ADVERSÁRIO");
@@ -98,12 +98,23 @@ public abstract class Criatura {
 	} // ataque fisico
 
 	public void ataqueElemental(Criatura atacante, Criatura defensor) {
-		System.out.println("Ataque elemental!");
 		double fator = fatorCriatura(atacante, defensor);
-		System.out.println("-" + fator);
+		System.out.println("ATAQUE ELEMENTAL " + fator );
 		receberDano(atacante, defensor, fator);
-		System.out.println("PONTOS DE VIDA DO ADVERSÁRIO");
-		System.out.println(defensor.getPONTOS_DE_VIDA());
+	}
+	public String caracteristicas(Criatura criatura) {
+		return String.format("" +
+						"CRIATURA: %s\n" +
+						"ELEMENTO: %s\n" +
+						"PODER: %d\n" +
+						"ATAQUE: %d\n" +
+						"DEFESA: %d\n" +
+						"VELOCIDADE: %d\n" +
+						"PONTOS DE VIDA: %d\n" +
+						"_________________________________", criatura.getNOME(), criatura.getELEMENTO(),
+				criatura.getPODER(), criatura.getATAQUE(),
+				criatura.getDEFESA(), criatura.getVELOCIDADE(),
+				criatura.getPONTOS_DE_VIDA());
 	}
 
 	public abstract double fatorCriatura(Criatura atacante, Criatura defesor);
