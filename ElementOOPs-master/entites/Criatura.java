@@ -92,13 +92,15 @@ public abstract class Criatura {
 				/ defensor.getDEFESA();
 		System.out.println("ATAQUE FÍSICO: " + DANO);
 		receberDano(atacante, defensor, 0);
-		System.out.println("PONTOS DE VIDA DO ADVERSÁRIO: " + defensor.getPONTOS_DE_VIDA());
+		System.out.println("PONTOS DE VIDA: " + defensor.getPONTOS_DE_VIDA());
 	} // ataque fisico
 
 	public void ataqueElemental(Criatura atacante, Criatura defensor) {
 		double fator = fatorCriatura(atacante, defensor);
-		System.out.println("ATAQUE ELEMENTAL " + fator );
+		System.out.println("ATAQUE ELEMENTAL " + fator);
 		receberDano(atacante, defensor, fator);
+		System.out.println("PONTOS DE VIDA: " + defensor.getPONTOS_DE_VIDA());
+		//mexi no ataque elemental, o fator está dando 0.0, ms só do inimigo
 	}
 	public String caracteristicas(Criatura criatura) {
 		return String.format("" +
