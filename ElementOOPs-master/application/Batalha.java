@@ -16,8 +16,8 @@ import java.util.Scanner;
 
 public class Batalha {
     Scanner sc;
-    private static Criatura[] criaturas = new Criatura[4];
 
+    private static Criatura[] criaturas = new Criatura[4];
     public Batalha() {
         this.sc = new Scanner(System.in);
     }
@@ -94,48 +94,71 @@ public class Batalha {
     }
 
     public void batalha() {
+        System.out.println(criaturas[0].getNOME());
+        System.out.println(criaturas[0].getELEMENTO());
+        System.out.println(criaturas[0].getPONTOS_DE_VIDA());
 
-        System.out.println(criaturas[0].caracteristicas(criaturas[0]));
-        System.out.println("ADVERSÁRIO: ");
-        System.out.println(criaturas[1].caracteristicas(criaturas[1]));
 
-        if (criaturas[0].getVELOCIDADE() > criaturas[1].getVELOCIDADE()) {
+        // verifica se a criatura escolhida é mais veloz que o adversario
+        if (criaturas[0].getVELOCIDADE() >= criaturas[1].getVELOCIDADE()) {
+            escolhido(criaturas[0], criaturas[1] );
+            inimigo(criaturas[1], criaturas[0] );
 
-            System.out.println("1. Realizar ataque físico \n" +
-                    "2. Realizar ataque elemental \n" +
-                    "3. Sair do programa");
-            int escolha = this.sc.nextInt();
-            sc.nextLine();
-            switch (escolha) {
-                case 1:
-                    criaturas[0].ataqueFisico(criaturas[0], criaturas[1]);
-                    break;
-                case 2:
-                    criaturas[0].ataqueElemental(criaturas[0], criaturas[1]);
-                    break;
-                case 3:
-                    System.out.println("Processando..");
-                    System.out.println("Jogo finalizado!");
-                    return;
-            }
             if(statusDaBatalha() == false) {
                 this.batalha();
 
             }else{
-                System.out.println("VOCÊ GANHOU");
+                resetarPontoDeVida();
+                System.out.println("SUA VIDA FOI REGENERADA " + criaturas[0].getPONTOS_DE_VIDA());
+                System.out.println("LUTA ENCERRADA");
             }
 
         } else if (criaturas[1].getVELOCIDADE() > criaturas[0].getVELOCIDADE()) {
-            Random rand = new Random();
-            int escolha = rand.nextInt(2) + 1;
-            switch (escolha) {
-                case 1:
-                    criaturas[1].ataqueFisico(criaturas[1], criaturas[0]);
-                    break;
-                case 2:
-                    criaturas[1].ataqueElemental(criaturas[1], criaturas[0]);
-                    break;
+            inimigo(criaturas[1], criaturas[0]);
+            escolhido(criaturas[0], criaturas[1]);
+
+            if(statusDaBatalha() == false) {
+                this.batalha();
+
+            }else{
+                resetarPontoDeVida();
+                System.out.println("LUTA ENCERRADA");
+                System.out.println("SUA VIDA FOI REGENERADA " + criaturas[0].getPONTOS_DE_VIDA());
             }
+
+            }
+        }
+
+    public void escolhido(Criatura atacante, Criatura defensor){
+        System.out.println("1. Realizar ataque físico \n" +
+                "2. Realizar ataque elemental \n" +
+                "3. Sair do programa");
+        int escolha = this.sc.nextInt();
+        sc.nextLine();
+        switch (escolha) {
+            case 1:
+                atacante.ataqueFisico(atacante, defensor);
+                break;
+            case 2:
+                atacante.ataqueElemental(atacante, defensor);
+                break;
+            case 3:
+                System.out.println("Processando..");
+                System.out.println("Jogo finalizado!");
+                return;
+        }
+    }
+
+    public void inimigo(Criatura defensor, Criatura atacante){
+        Random rand = new Random();
+        int escolha = rand.nextInt(2) + 1;
+        switch (escolha) {
+            case 1:
+                defensor.ataqueFisico(defensor, atacante);
+                break;
+            case 2:
+                defensor.ataqueElemental(defensor, atacante);
+                break;
         }
     }
 
@@ -149,5 +172,8 @@ public class Batalha {
             System.out.println();
             return false;
         }
+    }
+    public static void resetarPontoDeVida(){
+        criaturas[0].setPONTOS_DE_VIDA(criaturas[0].getPONTOS_DE_VIDA());
     }
 }
