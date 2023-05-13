@@ -11,7 +11,6 @@ import entites.Criatura;
 import entites.StoneDev;
 import entites.WaveNerd;
 
-import java.io.PrintStream;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,8 +23,14 @@ public class Batalha {
     }
 
     public void escolhaCriatura() {
-        System.out.println("Informe qual criatura deseja inicar o jogo: \n1. StoneDev \n2. WaveNerd \n3. BurnCoder \n4. BreezeHacker \n5. (sair) ");
+        System.out.println("Informe qual criatura deseja inicar o jogo: \n" +
+                "1. StoneDev \n" +
+                "2. WaveNerd \n" +
+                "3. BurnCoder \n" +
+                "4. BreezeHacker \n" +
+                "5. (sair) ");
         int escolha = this.sc.nextInt();
+        sc.nextLine();
         if (escolha >= 1 && escolha <= 5) {
             switch (escolha) {
                 case 1:
@@ -61,16 +66,16 @@ public class Batalha {
                     System.out.println("Jogo finalizado!");
             }
 
-            this.iniciaTorneio();
+            this.iniciaABatalha();
         } else {
             System.out.println("Escolha inválida. Tente novamente.");
             this.escolhaCriatura();
         }
-
     }
 
-    public void iniciaTorneio() {
-        System.out.println("1. iniciar o torneio \n2. Sair do programa");
+    public void iniciaABatalha() {
+        System.out.println("1. iniciar o torneio \n" +
+                "2. Sair do programa");
         int escolha = this.sc.nextInt();
         this.sc.nextLine();
         if (escolha >= 1 && escolha <= 2) {
@@ -84,15 +89,23 @@ public class Batalha {
             }
         } else {
             System.out.println("Escolha inválida. Tente novamente.");
-            this.iniciaTorneio();
+            this.iniciaABatalha();
         }
-
     }
 
     public void batalha() {
+
+        System.out.println(criaturas[0].caracteristicas(criaturas[0]));
+        System.out.println("ADVERSÁRIO: ");
+        System.out.println(criaturas[1].caracteristicas(criaturas[1]));
+
         if (criaturas[0].getVELOCIDADE() > criaturas[1].getVELOCIDADE()) {
-            System.out.println("1. Realizar ataque físico \n2. Realizar ataque elemental \n3. Sair do programa");
+
+            System.out.println("1. Realizar ataque físico \n" +
+                    "2. Realizar ataque elemental \n" +
+                    "3. Sair do programa");
             int escolha = this.sc.nextInt();
+            sc.nextLine();
             switch (escolha) {
                 case 1:
                     criaturas[0].ataqueFisico(criaturas[0], criaturas[1]);
@@ -105,23 +118,28 @@ public class Batalha {
                     System.out.println("Jogo finalizado!");
                     return;
             }
-
-            if (!this.statusBatalha()) {
+            if(statusDaBatalha() == false) {
                 this.batalha();
+
+            }else{
+                System.out.println("VOCÊ GANHOU");
             }
+
         } else if (criaturas[1].getVELOCIDADE() > criaturas[0].getVELOCIDADE()) {
             Random rand = new Random();
             int escolha = rand.nextInt(2) + 1;
-            if (escolha == 1) {
-                criaturas[1].ataqueFisico(criaturas[1], criaturas[0]);
-            } else if (escolha == 2) {
-                criaturas[1].ataqueElemental(criaturas[1], criaturas[0]);
+            switch (escolha) {
+                case 1:
+                    criaturas[1].ataqueFisico(criaturas[1], criaturas[0]);
+                    break;
+                case 2:
+                    criaturas[1].ataqueElemental(criaturas[1], criaturas[0]);
+                    break;
             }
         }
-
     }
 
-    public boolean statusBatalha() {
+    public boolean statusDaBatalha() {
         if (criaturas[0].getPONTOS_DE_VIDA() <= 0) {
             return true;
         } else if (criaturas[1].getPONTOS_DE_VIDA() <= 0) {
