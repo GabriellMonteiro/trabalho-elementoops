@@ -1,8 +1,8 @@
-package entites;
+package criatura;
 
 import java.util.Random;
 
-public class WaveNerd extends Criatura{
+public class StoneDev extends Criatura{
 	private String NOME;
 	private String ELEMENTO;
 	private int PODER;
@@ -11,10 +11,10 @@ public class WaveNerd extends Criatura{
 	private int VELOCIDADE;
 	private int PONTOS_DE_VIDA;
 
-	public WaveNerd() {
+	public StoneDev(){
 		Random rand = new Random();
-		setNOME("WaveNerd");
-		setELEMENTO("Agua");
+		setNOME("StoneDev");
+		setELEMENTO("Terra");
 		setPODER(rand.nextInt(21) + 10);
 		setATAQUE(rand.nextInt(11) + 5);
 		setDEFESA(rand.nextInt(11) + 5);
@@ -24,22 +24,27 @@ public class WaveNerd extends Criatura{
 
 	@Override
 	public double fatorCriatura(Criatura atacante, Criatura defesor) {
-		if (atacante.getELEMENTO().equals("Agua") && defesor.getELEMENTO().equals(("Terra"))) {
+		if (atacante.getELEMENTO().equals("Terra") && defesor.getELEMENTO().equals(("Ar"))) {
 			double fator = atacante.getPODER() * atacante.getATAQUE() / defesor.getDEFESA() * 1;
 			return fator;
-		} else if (atacante.getELEMENTO().equals("Agua") && defesor.getELEMENTO().equals(("Ar"))){
+		} else if (atacante.getELEMENTO().equals("Terra") && defesor.getELEMENTO().equals(("Fogo"))){
 			double fator = atacante.getPODER() * atacante.getATAQUE() / defesor.getDEFESA() * 1;
 			return fator;
 
-		} else if(atacante.getELEMENTO().equals("Agua") && defesor.getELEMENTO().equals(("Agua"))) {
+		} else if(atacante.getELEMENTO().equals("Terra") && defesor.getELEMENTO().equals(("Terra"))) {
 			double fator = atacante.getPODER() * atacante.getATAQUE() / defesor.getDEFESA() * 0.5;
 			return fator;
 
-		} else if (atacante.getELEMENTO().equals("Agua") && defesor.getELEMENTO().equals(("Fogo"))){
+		} else if (atacante.getELEMENTO().equals("Terra") && defesor.getELEMENTO().equals(("Agua"))){
 			double fator = atacante.getPODER() * atacante.getATAQUE() / defesor.getDEFESA() * 2;
 			return fator;
 		}
-		return 2;
-		}
-
+		return 0;
+	}
+	@Override
+	public String fraseDeEfeito(Criatura criatura) {
+		String frase = "MINHA FORÇA É A SOLIDEZ DA TERRA SOB MEUS PÉS.";
+		return frase;
+	}
 }
+

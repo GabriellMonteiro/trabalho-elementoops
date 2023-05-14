@@ -90,16 +90,19 @@ public abstract class Criatura {
 	public void ataqueFisico(Criatura atacante, Criatura defensor) {
 		int DANO = (atacante.getPODER() * atacante.getATAQUE())
 				/ defensor.getDEFESA();
-		System.out.println("ATAQUE FÍSICO: " + DANO);
+		System.out.println(atacante.getNOME().toUpperCase() + " EFETUOU UM ATAQUE FÍSICO");
 		receberDano(atacante, defensor, 0);
-		System.out.println("PONTOS DE VIDA: " + defensor.getPONTOS_DE_VIDA());
+		System.out.println("DANO: -" + DANO);
+		System.out.println("PONTOS DE VIDA RESTANTE: " + defensor.getPONTOS_DE_VIDA());
+		System.out.println();
 	} // ataque fisico
 
 	public void ataqueElemental(Criatura atacante, Criatura defensor) {
 		double fator = fatorCriatura(atacante, defensor);
-		System.out.println("ATAQUE ELEMENTAL " + fator);
+		System.out.println(atacante.getNOME().toUpperCase() + " EFETUOU UM ATAQUE ELEMENTAL");
 		receberDano(atacante, defensor, fator);
-		System.out.println("PONTOS DE VIDA: " + defensor.getPONTOS_DE_VIDA());
+		System.out.println("PONTOS DE VIDA RESTANTE: " + defensor.getPONTOS_DE_VIDA());
+		System.out.println();
 		//mexi no ataque elemental, o fator está dando 0.0, ms só do inimigo
 	}
 	public String caracteristicas(Criatura criatura) {
@@ -118,5 +121,6 @@ public abstract class Criatura {
 	}
 
 	public abstract double fatorCriatura(Criatura atacante, Criatura defesor);
+	public abstract String fraseDeEfeito(Criatura criatura);
 
 } // FIM DA CLASSE CRIATURAS
