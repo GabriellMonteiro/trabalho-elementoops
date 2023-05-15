@@ -1,7 +1,8 @@
-package entites;
+package criatura;
+
+import application.Batalha;
 
 public abstract class Criatura {
-
 	private String NOME;
 	private String ELEMENTO;
 	private int PODER;
@@ -9,7 +10,11 @@ public abstract class Criatura {
 	private int DEFESA;
 	private int VELOCIDADE;
 	private int PONTOS_DE_VIDA;
+<<<<<<< HEAD
 	private int pontosDeVidaInilcial;
+=======
+	private int PONTOS_DE_VIDA_INICIAL;
+>>>>>>> origin/master
 
 	public Criatura() {
 		setNOME(this.NOME);
@@ -21,6 +26,7 @@ public abstract class Criatura {
 		setPONTOS_DE_VIDA(this.PONTOS_DE_VIDA);
 		setPontosDeVidaInilcial(this.PONTOS_DE_VIDA);
 	}
+	Batalha batalha = new Batalha();
 
 	public String getNOME() {
 		return NOME;
@@ -78,9 +84,18 @@ public abstract class Criatura {
 		this.PONTOS_DE_VIDA = PONTOS_DE_VIDA;
 	}
 
+<<<<<<< HEAD
 	public int getPontosDeVidaInilcial() {return pontosDeVidaInilcial;}
 
 	public void setPontosDeVidaInilcial(int pontosDeVidaInilcial) {this.pontosDeVidaInilcial = pontosDeVidaInilcial;}
+=======
+	public int getPONTOS_DE_VIDA_INICIAL() {
+		return PONTOS_DE_VIDA_INICIAL;
+	}
+	public void setPONTOS_DE_VIDA_INICIAL(int PONTOS_DE_VIDA_INICIAL) {
+		this.PONTOS_DE_VIDA_INICIAL = PONTOS_DE_VIDA_INICIAL;
+	}
+>>>>>>> origin/master
 
 	public void receberDano(Criatura atacante, Criatura defensor, double fator){
 		if(fator == 0){
@@ -91,7 +106,7 @@ public abstract class Criatura {
 			double DANO = fator;
 			defensor.setPONTOS_DE_VIDA((int) (defensor.getPONTOS_DE_VIDA() - DANO));
 		}
-	} // Define o dano e subtrai dos pontos de vida
+	}
 
 	public void ataqueFisico(Criatura atacante, Criatura defensor) {
 		int DANO = (atacante.getPODER() * atacante.getATAQUE())
@@ -99,18 +114,24 @@ public abstract class Criatura {
 		System.out.println(atacante.getNOME().toUpperCase() + " EFETUOU UM ATAQUE FÍSICO");
 		receberDano(atacante, defensor, 0);
 		System.out.println("DANO: -" + DANO);
-		System.out.println("PONTOS DE VIDA RESTANTE: " + defensor.getPONTOS_DE_VIDA());
+		System.out.println("PONTOS DE VIDA RESTANTE DO "+ defensor.getNOME().toUpperCase()+ ": " + defensor.getPONTOS_DE_VIDA());
 		System.out.println();
-	} // ataque fisico
+		batalha.tempoDeEspera();
+	}
 
 	public void ataqueElemental(Criatura atacante, Criatura defensor) {
 		double fator = fatorCriatura(atacante, defensor);
 		System.out.println(atacante.getNOME().toUpperCase() + " EFETUOU UM ATAQUE ELEMENTAL");
+		System.out.println("DANO: -" + fator);
 		receberDano(atacante, defensor, fator);
+<<<<<<< HEAD
 		System.out.println("DANO: -" + fator);
 		System.out.println("PONTOS DE VIDA RESTANTE: " + defensor.getPONTOS_DE_VIDA());
+=======
+		System.out.println("PONTOS DE VIDA RESTANTE DO " + defensor.getNOME().toUpperCase() + ": " + defensor.getPONTOS_DE_VIDA());
+>>>>>>> origin/master
 		System.out.println();
-		//mexi no ataque elemental, o fator está dando 0.0, ms só do inimigo
+		batalha.tempoDeEspera();
 	}
 	public String caracteristicas(Criatura criatura) {
 		return String.format("" +
@@ -130,4 +151,4 @@ public abstract class Criatura {
 	public abstract double fatorCriatura(Criatura atacante, Criatura defesor);
 	public abstract String fraseDeEfeito(Criatura criatura);
 
-} // FIM DA CLASSE CRIATURAS
+}

@@ -15,6 +15,7 @@ public class Menu {
                 case 2 -> {
                     System.out.println("Processando..");
                     System.out.println("Jogo finalizado!");
+                    System.exit(0);
                 }
             }
         } else {

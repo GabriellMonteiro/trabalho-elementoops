@@ -5,11 +5,11 @@
 
 package application;
 
-import entites.BreezeHacker;
-import entites.BurnCoder;
-import entites.Criatura;
-import entites.StoneDev;
-import entites.WaveNerd;
+import criatura.BreezeHacker;
+import criatura.BurnCoder;
+import criatura.Criatura;
+import criatura.StoneDev;
+import criatura.WaveNerd;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -162,7 +162,7 @@ public class Batalha {
         return criaturas[0].getPONTOS_DE_VIDA() <= 0 || criaturas[criaturaInimiga].getPONTOS_DE_VIDA() <= 0;
     }
     public static void resetarPontoDeVida(){
-        criaturas[0].setPONTOS_DE_VIDA(criaturas[0].getPontosDeVidaInilcial());
+        criaturas[0].setPONTOS_DE_VIDA(criaturas[0].getPONTOS_DE_VIDA());
     }
     public void continuarTorneio(){
         if (criaturas[0].getPONTOS_DE_VIDA() <= 0) {
