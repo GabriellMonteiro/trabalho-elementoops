@@ -1,6 +1,6 @@
 # Element Oops
 
-Element Oops é um jogo simples de batalha em Java. Nele, quatro criaturas lutam entre si: Stonedev, Wavenerd, Burdecoder e Blazehacker. Cada criatura possui habilidades únicas e diferentes pontos de vida, tornando cada batalha única.
+Element Oops é um jogo simples de batalha em Java. Nele, quatro criaturas lutam entre si: Stonedev, Wavenerd, Burdecoder e BreezeHacker. Cada criatura possui habilidades únicas e diferentes pontos de vida, tornando cada batalha única.
 
 ## Como jogar
 
