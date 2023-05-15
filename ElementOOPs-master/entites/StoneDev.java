@@ -1,4 +1,4 @@
-package criatura;
+package entites;
 
 import java.util.Random;
 
@@ -10,8 +10,9 @@ public class StoneDev extends Criatura{
 	private int DEFESA;
 	private int VELOCIDADE;
 	private int PONTOS_DE_VIDA;
+	private int pontosDeVidaInilcial;
 
-	public StoneDev(){
+	public StoneDev() {
 		Random rand = new Random();
 		setNOME("StoneDev");
 		setELEMENTO("Terra");
@@ -20,8 +21,8 @@ public class StoneDev extends Criatura{
 		setDEFESA(rand.nextInt(11) + 5);
 		setVELOCIDADE(rand.nextInt(10) + 1);
 		setPONTOS_DE_VIDA(rand.nextInt(201) + 200);
+		setPontosDeVidaInilcial(getPONTOS_DE_VIDA());
 	}
-
 	@Override
 	public double fatorCriatura(Criatura atacante, Criatura defesor) {
 		if (atacante.getELEMENTO().equals("Terra") && defesor.getELEMENTO().equals(("Ar"))) {

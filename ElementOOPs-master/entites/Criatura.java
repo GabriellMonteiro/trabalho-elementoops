@@ -9,6 +9,7 @@ public abstract class Criatura {
 	private int DEFESA;
 	private int VELOCIDADE;
 	private int PONTOS_DE_VIDA;
+	private int pontosDeVidaInilcial;
 
 	public Criatura() {
 		setNOME(this.NOME);
@@ -18,6 +19,7 @@ public abstract class Criatura {
 		setDEFESA(this.DEFESA);
 		setVELOCIDADE(this.VELOCIDADE);
 		setPONTOS_DE_VIDA(this.PONTOS_DE_VIDA);
+		setPontosDeVidaInilcial(this.PONTOS_DE_VIDA);
 	}
 
 	public String getNOME() {
@@ -76,6 +78,10 @@ public abstract class Criatura {
 		this.PONTOS_DE_VIDA = PONTOS_DE_VIDA;
 	}
 
+	public int getPontosDeVidaInilcial() {return pontosDeVidaInilcial;}
+
+	public void setPontosDeVidaInilcial(int pontosDeVidaInilcial) {this.pontosDeVidaInilcial = pontosDeVidaInilcial;}
+
 	public void receberDano(Criatura atacante, Criatura defensor, double fator){
 		if(fator == 0){
 			int DANO = (atacante.getPODER() * atacante.getATAQUE())
@@ -101,6 +107,7 @@ public abstract class Criatura {
 		double fator = fatorCriatura(atacante, defensor);
 		System.out.println(atacante.getNOME().toUpperCase() + " EFETUOU UM ATAQUE ELEMENTAL");
 		receberDano(atacante, defensor, fator);
+		System.out.println("DANO: -" + fator);
 		System.out.println("PONTOS DE VIDA RESTANTE: " + defensor.getPONTOS_DE_VIDA());
 		System.out.println();
 		//mexi no ataque elemental, o fator está dando 0.0, ms só do inimigo
