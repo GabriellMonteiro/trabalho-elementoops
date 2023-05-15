@@ -10,6 +10,7 @@ public class BreezeHacker extends Criatura {
 	private int DEFESA;
 	private int VELOCIDADE;
 	private int PONTOS_DE_VIDA;
+	private int PONTOS_DE_VIDA_INICIAL;
 
 	public BreezeHacker() {
 		Random rand = new Random();
@@ -20,6 +21,7 @@ public class BreezeHacker extends Criatura {
 		setDEFESA(rand.nextInt(11) + 5);
 		setVELOCIDADE(rand.nextInt(10) + 1);
 		setPONTOS_DE_VIDA(rand.nextInt(201) + 200);
+		setPONTOS_DE_VIDA_INICIAL(getPONTOS_DE_VIDA());
 	}
 
 	@Override

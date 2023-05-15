@@ -5,11 +5,11 @@
 
 package application;
 
-import criatura.BreezeHacker;
-import criatura.BurnCoder;
-import criatura.Criatura;
-import criatura.StoneDev;
-import criatura.WaveNerd;
+import entites.BreezeHacker;
+import entites.BurnCoder;
+import entites.Criatura;
+import entites.StoneDev;
+import entites.WaveNerd;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -140,7 +140,6 @@ public class Batalha {
                 System.out.println("Jogo finalizado!");
                 break;
         }
-
     }
 
     public void inimigo(Criatura atacante, Criatura defensor){
@@ -162,7 +161,7 @@ public class Batalha {
         return criaturas[0].getPONTOS_DE_VIDA() <= 0 || criaturas[criaturaInimiga].getPONTOS_DE_VIDA() <= 0;
     }
     public static void resetarPontoDeVida(){
-        criaturas[0].setPONTOS_DE_VIDA(criaturas[0].getPONTOS_DE_VIDA());
+        criaturas[0].setPONTOS_DE_VIDA(criaturas[0].getPONTOS_DE_VIDA_INICIAL());
     }
     public void continuarTorneio(){
         if (criaturas[0].getPONTOS_DE_VIDA() <= 0) {
@@ -172,10 +171,10 @@ public class Batalha {
             System.out.println("LUTA ENCERRADA");
             System.out.println(criaturas[0].getNOME().toUpperCase() + " VENCEU A " + criaturaInimiga + "ª RODADA");
             resetarPontoDeVida();
-            System.out.println();
-            System.out.println("SUA VIDA FOI REGENERADA " + criaturas[0].getPONTOS_DE_VIDA());
-
-            System.out.println();
+            System.out.println("\nREGENERANDO A VIDA..");
+            tempoDeEspera();
+            System.out.println("\nSUA VIDA FOI REGENERADA: " + criaturas[0].getPONTOS_DE_VIDA()+ "\n");
+            tempoDeEspera();
 
             ++criaturaInimiga;
             if (criaturaInimiga >= criaturas.length) {
@@ -183,8 +182,8 @@ public class Batalha {
                 System.out.println(criaturas[0].fraseDeEfeito(criaturas[0]));
                 criaturaInimiga = 1;
                 System.out.println("\n" +
-                        "1. INICIAR UM NOVO TORNEIO" +
-                        "2. ENCERRAR APLICAÇÃO");
+                        "1. Iniciar um novo torneio\n" +
+                        "2. Sair do programa");
                 int escolha = sc.nextInt();
                 switch (escolha) {
                     case 1:
@@ -208,7 +207,7 @@ public class Batalha {
     }
     public void tempoDeEspera(){
      try {
-        Thread.sleep(2000); // aguarda 1 segundo
+        Thread.sleep(2000);
     } catch (InterruptedException e) {
          System.out.println("Ocorreu um erro inesperado." +
                  "Reinicializando o programa...");
