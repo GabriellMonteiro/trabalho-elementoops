@@ -3,133 +3,124 @@ package criatura;
 import application.Batalha;
 
 public abstract class Criatura {
-	private String NOME;
-	private String ELEMENTO;
-	private int PODER;
-	private int ATAQUE;
-	private int DEFESA;
-	private int VELOCIDADE;
-	private int PONTOS_DE_VIDA;
-<<<<<<< HEAD
+	private String nome;
+	private String elemento;
+	private int poder;
+	private int ataque;
+	private int defesa;
+	private int velocidade;
+	private int pontosDeVida;
 	private int pontosDeVidaInilcial;
-=======
-	private int PONTOS_DE_VIDA_INICIAL;
->>>>>>> origin/master
+
 
 	public Criatura() {
-		setNOME(this.NOME);
-		setELEMENTO(this.ELEMENTO);
-		setPODER(this.PODER);
-		setATAQUE(this.ATAQUE);
-		setDEFESA(this.DEFESA);
-		setVELOCIDADE(this.VELOCIDADE);
-		setPONTOS_DE_VIDA(this.PONTOS_DE_VIDA);
-		setPontosDeVidaInilcial(this.PONTOS_DE_VIDA);
+		setNome(this.nome);
+		setElemento(this.elemento);
+		setPoder(this.poder);
+		setAtaque(this.ataque);
+		setDefesa(this.defesa);
+		setVelocidade(this.velocidade);
+		setPontosDeVida(this.pontosDeVida);
+		setPontosDeVidaInilcial(this.pontosDeVida);
 	}
 	Batalha batalha = new Batalha();
 
-	public String getNOME() {
-		return NOME;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNOME(String NOME) {
-		this.NOME = NOME;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getELEMENTO() {
-		return ELEMENTO;
+	public String getElemento() {
+		return elemento;
 	}
 
-	public void setELEMENTO(String ELEMENTO) {
-		this.ELEMENTO = ELEMENTO;
+	public void setElemento(String elemento) {
+		this.elemento = elemento;
 	}
 
-	public int getPODER() {
-		return PODER;
+	public int getPoder() {
+		return poder;
 	}
 
-	public void setPODER(int PODER) {
-		this.PODER = PODER;
+	public void setPoder(int poder) {
+		this.poder = poder;
 	}
 
-	public int getATAQUE() {
-		return ATAQUE;
+	public int getAtaque() {
+		return ataque;
 	}
 
-	public void setATAQUE(int ATAQUE) {
-		this.ATAQUE = ATAQUE;
+	public void setAtaque(int ataque) {
+		this.ataque = ataque;
 	}
 
-	public int getDEFESA() {
-		return DEFESA;
+	public int getDefesa() {
+		return defesa;
 	}
 
-	public void setDEFESA(int DEFESA) {
-		this.DEFESA = DEFESA;
+	public void setDefesa(int defesa) {
+		this.defesa = defesa;
 	}
 
-	public int getVELOCIDADE() {
-		return VELOCIDADE;
+	public int getVelocidade() {
+		return velocidade;
 	}
 
-	public void setVELOCIDADE(int VELOCIDADE) {
-		this.VELOCIDADE = VELOCIDADE;
+	public void setVelocidade(int velocidade) {
+		this.velocidade = velocidade;
 	}
 
-	public int getPONTOS_DE_VIDA() {
-		return PONTOS_DE_VIDA;
+	public int getPontosDeVida() {
+		return pontosDeVida;
 	}
 
-	public void setPONTOS_DE_VIDA(int PONTOS_DE_VIDA) {
-		this.PONTOS_DE_VIDA = PONTOS_DE_VIDA;
+	public void setPontosDeVida(int pontosDeVida) {
+		this.pontosDeVida = pontosDeVida;
 	}
 
-<<<<<<< HEAD
 	public int getPontosDeVidaInilcial() {return pontosDeVidaInilcial;}
 
 	public void setPontosDeVidaInilcial(int pontosDeVidaInilcial) {this.pontosDeVidaInilcial = pontosDeVidaInilcial;}
-=======
-	public int getPONTOS_DE_VIDA_INICIAL() {
-		return PONTOS_DE_VIDA_INICIAL;
-	}
-	public void setPONTOS_DE_VIDA_INICIAL(int PONTOS_DE_VIDA_INICIAL) {
-		this.PONTOS_DE_VIDA_INICIAL = PONTOS_DE_VIDA_INICIAL;
-	}
->>>>>>> origin/master
 
 	public void receberDano(Criatura atacante, Criatura defensor, double fator){
 		if(fator == 0){
-			int DANO = (atacante.getPODER() * atacante.getATAQUE())
-					/ defensor.getDEFESA();
-			defensor.setPONTOS_DE_VIDA(defensor.getPONTOS_DE_VIDA() - DANO);
+			int DANO = (atacante.getPoder() * atacante.getAtaque())
+					/ defensor.getDefesa();
+			defensor.setPontosDeVida(defensor.getPontosDeVida() - DANO);
 		} else {
 			double DANO = fator;
-			defensor.setPONTOS_DE_VIDA((int) (defensor.getPONTOS_DE_VIDA() - DANO));
+			defensor.setPontosDeVida((int) (defensor.getPontosDeVida() - DANO));
 		}
 	}
 
 	public void ataqueFisico(Criatura atacante, Criatura defensor) {
-		int DANO = (atacante.getPODER() * atacante.getATAQUE())
-				/ defensor.getDEFESA();
-		System.out.println(atacante.getNOME().toUpperCase() + " EFETUOU UM ATAQUE FÍSICO");
+		int DANO = (atacante.getPoder() * atacante.getAtaque())
+				/ defensor.getDefesa();
+		System.out.println(atacante.getNome().toUpperCase() + " EFETUOU UM ATAQUE FÍSICO");
 		receberDano(atacante, defensor, 0);
 		System.out.println("DANO: -" + DANO);
-		System.out.println("PONTOS DE VIDA RESTANTE DO "+ defensor.getNOME().toUpperCase()+ ": " + defensor.getPONTOS_DE_VIDA());
+		if (defensor.getPontosDeVida() < 0) {
+			System.out.println("PONTOS DE VIDA RESTANTE DO " + defensor.getNome().toUpperCase() + ": 0");
+		}else{
+			System.out.println("PONTOS DE VIDA RESTANTE DO " + defensor.getNome().toUpperCase() + ": " + defensor.getPontosDeVida());
+		}
 		System.out.println();
 		batalha.tempoDeEspera();
 	}
 
 	public void ataqueElemental(Criatura atacante, Criatura defensor) {
 		double fator = fatorCriatura(atacante, defensor);
-		System.out.println(atacante.getNOME().toUpperCase() + " EFETUOU UM ATAQUE ELEMENTAL");
+		System.out.println(atacante.getNome().toUpperCase() + " EFETUOU O " + fraseDeAtaque(atacante)) ;
 		System.out.println("DANO: -" + fator);
 		receberDano(atacante, defensor, fator);
-<<<<<<< HEAD
-		System.out.println("DANO: -" + fator);
-		System.out.println("PONTOS DE VIDA RESTANTE: " + defensor.getPONTOS_DE_VIDA());
-=======
-		System.out.println("PONTOS DE VIDA RESTANTE DO " + defensor.getNOME().toUpperCase() + ": " + defensor.getPONTOS_DE_VIDA());
->>>>>>> origin/master
+			if (defensor.getPontosDeVida() < 0) {
+				System.out.println("PONTOS DE VIDA RESTANTE DO " + defensor.getNome().toUpperCase() + ": 0");
+			}else{
+				System.out.println("PONTOS DE VIDA RESTANTE DO " + defensor.getNome().toUpperCase() + ": " + defensor.getPontosDeVida());
+			}
 		System.out.println();
 		batalha.tempoDeEspera();
 	}
@@ -142,13 +133,14 @@ public abstract class Criatura {
 						"DEFESA: %d\n" +
 						"VELOCIDADE: %d\n" +
 						"PONTOS DE VIDA: %d\n" +
-						"_________________________________", criatura.getNOME(), criatura.getELEMENTO(),
-				criatura.getPODER(), criatura.getATAQUE(),
-				criatura.getDEFESA(), criatura.getVELOCIDADE(),
-				criatura.getPONTOS_DE_VIDA());
+						"_________________________________", criatura.getNome(), criatura.getElemento(),
+				criatura.getPoder(), criatura.getAtaque(),
+				criatura.getDefesa(), criatura.getVelocidade(),
+				criatura.getPontosDeVida());
 	}
 
 	public abstract double fatorCriatura(Criatura atacante, Criatura defesor);
 	public abstract String fraseDeEfeito(Criatura criatura);
+	public abstract String fraseDeAtaque(Criatura criatura);
 
 }

@@ -16,16 +16,13 @@ import java.util.Scanner;
 
 public class Batalha {
     Scanner sc;
-
     private static Criatura[] criaturas = new Criatura[4];
-    public Batalha() {
-        this.sc = new Scanner(System.in);
-    }
+    public Batalha() {this.sc = new Scanner(System.in);}
 
     int criaturaInimiga = 1;
 
     public void escolhaCriatura() {
-        System.out.println("Informe qual criatura deseja inicar o jogo: \n" +
+        System.out.println("Informe qual criatura deseja inicar o torneio: \n" +
                 "1. StoneDev \n" +
                 "2. WaveNerd \n" +
                 "3. BurnCoder \n" +
@@ -60,18 +57,32 @@ public class Batalha {
                     criaturas[3] = new BurnCoder();
                     break;
                 case 5:
-                    System.out.println("Processando..");
-                    System.out.println("Jogo finalizado!");
-            }
+                    System.out.println("Deseja realmente sair?\n" +
+                            "1. Sim\n" +
+                            "2. Não");
 
-            this.iniciaABatalha();
+                    int confirmacao = sc.nextInt();
+                    if (confirmacao == 1) {
+                        System.out.println("Processando..");
+                        tempoDeEspera();
+                        System.out.println("Jogo finalizado!");
+                        System.exit(0);
+                    } else {
+                        System.out.println("Continuando o programa..");
+                        tempoDeEspera();
+                        escolhaCriatura();
+                        break;
+                    }
+
+            }
+            this.iniciarBatalha();
         } else {
             System.out.println("Escolha inválida. Tente novamente.");
             this.escolhaCriatura();
         }
     }
 
-    public void iniciaABatalha() {
+    public void iniciarBatalha() {
         System.out.println("CRIAUTURA ESCOLHIDA:");
         System.out.println(criaturas[0].fraseDeEfeito(criaturas[0]));
         tempoDeEspera();
@@ -81,45 +92,59 @@ public class Batalha {
         System.out.println(criaturas[criaturaInimiga].fraseDeEfeito(criaturas[criaturaInimiga]));
         tempoDeEspera();
         System.out.println(criaturas[criaturaInimiga].caracteristicas(criaturas[criaturaInimiga]));
-        System.out.println("1. iniciar o torneio \n" +
+        System.out.println("1. iniciar a batalha? \n" +
                 "2. Sair do programa");
         int escolha = this.sc.nextInt();
         this.sc.nextLine();
         if (escolha >= 1 && escolha <= 2) {
             switch (escolha) {
                 case 1:
-                    this.batalha();
+                    this.batalhar();
                     break;
                 case 2:
-                    System.out.println("Processando..");
-                    System.out.println("Jogo finalizado!");
+                    System.out.println("Deseja realmente sair?\n" +
+                            "1. Sim\n" +
+                            "2. Não");
+
+                    int confirmacao = sc.nextInt();
+                    if (confirmacao == 1) {
+                        System.out.println("Processando..");
+                        tempoDeEspera();
+                        System.out.println("Jogo finalizado!");
+                        System.exit(0);
+                    } else {
+                        System.out.println("Continuando o programa.");
+                        tempoDeEspera();
+                        iniciarBatalha();
+                        break;
+                    }
             }
         } else {
             System.out.println("Escolha inválida. Tente novamente.");
-            this.iniciaABatalha();
+            this.iniciarBatalha();
         }
 
     }
 
-    public void batalha() {
-        if (criaturas[0].getVELOCIDADE() >= criaturas[criaturaInimiga].getVELOCIDADE()) {
-            escolhido(criaturas[0], criaturas[criaturaInimiga] );
+    public void batalhar() {
+        if (criaturas[0].getVelocidade() >= criaturas[criaturaInimiga].getVelocidade()) {
+            personagemEscolhido(criaturas[0], criaturas[criaturaInimiga] );
             if(this.statusDaBatalha() == false){
-                inimigo(criaturas[criaturaInimiga], criaturas[0] );
+                personagemInimigo(criaturas[criaturaInimiga], criaturas[0] );
             }
             this.continuarBatalha();
 
         } else {
-            inimigo(criaturas[criaturaInimiga], criaturas[0]);
+            personagemInimigo(criaturas[criaturaInimiga], criaturas[0]);
             if(this.statusDaBatalha() == false){
-                escolhido(criaturas[0], criaturas[criaturaInimiga]);
+                personagemEscolhido(criaturas[0], criaturas[criaturaInimiga]);
             }
             this.continuarBatalha();
 
         }
     }
 
-    public void escolhido(Criatura atacante, Criatura defensor){
+    public void personagemEscolhido(Criatura atacante, Criatura defensor){
         System.out.println("1. Realizar ataque físico \n" +
                 "2. Realizar ataque elemental \n" +
                 "3. Sair do programa");
@@ -136,15 +161,25 @@ public class Batalha {
                 atacante.ataqueElemental(atacante, defensor);
                 break;
             case 3:
-                System.out.println("Processando..");
-                System.out.println("Jogo finalizado!");
-                break;
-        }
+                System.out.println("Deseja realmente sair?\n" +
+                        "1. Sim\n" +
+                        "2. Não");
 
+                int confirmacao = sc.nextInt();
+                if (confirmacao == 1) {
+                    System.out.println("Processando..");
+                    tempoDeEspera();
+                    System.out.println("Jogo finalizado!");
+                    System.exit(0);
+                } else {
+                    System.out.println("Continuando o programa.");
+                    this.personagemEscolhido(atacante, defensor);
+                    break;
+                }
+        }
     }
 
-    public void inimigo(Criatura atacante, Criatura defensor){
-        //ADICIONEI UMA LINHA PRA MOSTRAR O ATAQUE
+    public void personagemInimigo(Criatura atacante, Criatura defensor){
         System.out.println("ATAQUE INIMIGO: ");
         Random rand = new Random();
         int escolha = rand.nextInt(2) + 1;
@@ -159,48 +194,36 @@ public class Batalha {
     }
 
     public boolean statusDaBatalha() {
-        return criaturas[0].getPONTOS_DE_VIDA() <= 0 || criaturas[criaturaInimiga].getPONTOS_DE_VIDA() <= 0;
+        return criaturas[0].getPontosDeVida() <= 0 || criaturas[criaturaInimiga].getPontosDeVida() <= 0;
     }
     public static void resetarPontoDeVida(){
-        criaturas[0].setPONTOS_DE_VIDA(criaturas[0].getPONTOS_DE_VIDA());
+        criaturas[0].setPontosDeVida(criaturas[0].getPontosDeVidaInilcial());
     }
     public void continuarTorneio(){
-        if (criaturas[0].getPONTOS_DE_VIDA() <= 0) {
+        if (criaturas[0].getPontosDeVida() <= 0) {
             System.out.println("VOCÊ FOI ELIMINADO! ");
 
-        } else if (criaturas[criaturaInimiga].getPONTOS_DE_VIDA() <= 0){
+        } else if (criaturas[criaturaInimiga].getPontosDeVida() <= 0){
             System.out.println("LUTA ENCERRADA");
-            System.out.println(criaturas[0].getNOME().toUpperCase() + " VENCEU A " + criaturaInimiga + "ª RODADA");
+            System.out.println(criaturas[0].getNome().toUpperCase() + " VENCEU A " + criaturaInimiga + "ª RODADA!!!");
             resetarPontoDeVida();
             System.out.println();
-            System.out.println("SUA VIDA FOI REGENERADA " + criaturas[0].getPONTOS_DE_VIDA());
-
-            System.out.println();
-
+            System.out.println("SUA VIDA FOI REGENERADA " + criaturas[0].getPontosDeVida() + "\n") ;
             ++criaturaInimiga;
             if (criaturaInimiga >= criaturas.length) {
-                System.out.println( criaturas[0].getNOME().toUpperCase() + " GANHOU  O TORNEIO");
+                System.out.println( criaturas[0].getNome().toUpperCase() + " GANHOU  O TORNEIO!!!");
                 System.out.println(criaturas[0].fraseDeEfeito(criaturas[0]));
                 criaturaInimiga = 1;
-                System.out.println("\n" +
-                        "1. INICIAR UM NOVO TORNEIO" +
-                        "2. ENCERRAR APLICAÇÃO");
-                int escolha = sc.nextInt();
-                switch (escolha) {
-                    case 1:
-                        this.escolhaCriatura();
-                        break;
-                    case 2:
-                        break;
-                }
+                System.out.println("\n" + "VOCÊ VENCEU PARABÉNS!!!!");
+                return;
             } else {
-                this.iniciaABatalha();
+                this.iniciarBatalha();
             }
         }
     }
     public void continuarBatalha(){
         if(statusDaBatalha() == false) {
-            this.batalha();
+            this.batalhar();
 
         }else{
             this.continuarTorneio();
@@ -208,7 +231,7 @@ public class Batalha {
     }
     public void tempoDeEspera(){
      try {
-        Thread.sleep(2000); // aguarda 1 segundo
+        Thread.sleep(1000);
     } catch (InterruptedException e) {
          System.out.println("Ocorreu um erro inesperado." +
                  "Reinicializando o programa...");
