@@ -30,7 +30,7 @@ public class Batalha {
                 "2. WaveNerd \n" +
                 "3. BurnCoder \n" +
                 "4. BreezeHacker \n" +
-                "5. (sair) ");
+                "5. Sair do programa ");
         int escolha = this.sc.nextInt();
         sc.nextLine();
         if (escolha >= 1 && escolha <= 5) {
@@ -62,6 +62,7 @@ public class Batalha {
                 case 5:
                     System.out.println("Processando..");
                     System.out.println("Jogo finalizado!");
+                    System.exit(0);
             }
 
             this.iniciaABatalha();
@@ -93,6 +94,7 @@ public class Batalha {
                 case 2:
                     System.out.println("Processando..");
                     System.out.println("Jogo finalizado!");
+                    System.exit(0);
             }
         } else {
             System.out.println("Escolha inválida. Tente novamente.");
@@ -138,7 +140,7 @@ public class Batalha {
             case 3:
                 System.out.println("Processando..");
                 System.out.println("Jogo finalizado!");
-                break;
+                System.exit(0);
         }
     }
 
@@ -190,6 +192,9 @@ public class Batalha {
                         this.escolhaCriatura();
                         break;
                     case 2:
+                        System.out.println("Processando..");
+                        System.out.println("Jogo finalizado!");
+                        System.exit(0);
                         break;
                 }
             } else {
